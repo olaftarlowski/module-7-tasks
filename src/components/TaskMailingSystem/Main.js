@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { clientAction } from "./server/server";
 import { default as api } from "./api/";
 import { Table, NewUser } from "./";
 
@@ -28,9 +29,14 @@ const Main = () => {
       return a.id - b.id;
     });
 
+  const servHandler = () => {
+    clientAction();
+  };
+
   return (
     <div>
       get mails
+      <button onClick={servHandler}>klik</button>
       <button onClick={check}>check</button>
       <div>
         <NewUser submitUser={postUserHandler} />

@@ -17,11 +17,13 @@ const messageData = {
   text: "Testing some Mailgun awesomeness!",
 };
 
-client.messages
-  .create(DOMAIN, messageData)
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+export const clientAction = () => {
+  client.messages
+    .create(DOMAIN, messageData)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
