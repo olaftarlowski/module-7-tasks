@@ -1,12 +1,13 @@
 import moment from "moment";
 import axios from "axios";
+const API_KEY = `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`;
 
 const API_URL = "https://api.airtable.com/v0/appLktO7FFmlPGju3/mails";
 
 const getData = async () => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
-    Authorization: "Bearer keyK9SjdjtlgfY2h5",
+    Authorization: API_KEY,
   };
 
   const res = await axios.get(API_URL).catch((error) => {
@@ -19,7 +20,7 @@ const getData = async () => {
 const postUser = async (userData) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
-    Authorization: "Bearer keyK9SjdjtlgfY2h5",
+    Authorization: API_KEY,
   };
 
   const newDate = moment().format("YYYY-MM-DD");
