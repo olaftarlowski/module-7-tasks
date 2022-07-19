@@ -30,11 +30,7 @@ const Main = () => {
     console.log(userData);
   };
 
-  const dataTable = userData
-    .map((el) => el.fields)
-    .sort((a, b) => {
-      return a.id - b.id;
-    });
+  const dataTable = userData.map((el) => el.fields);
 
   const servHandler = () => {
     clientAction();
