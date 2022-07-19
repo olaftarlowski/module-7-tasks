@@ -1,5 +1,4 @@
 import {
-  //   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -7,24 +6,24 @@ import {
 
 const columns = [
   {
-    accessorKey: "id",
+    accessorKey: "Name",
     header: () => <span>ID</span>,
   },
   {
-    accessorKey: "name",
+    accessorKey: "Content",
     header: () => <span>Name</span>,
   },
   {
-    accessorKey: "email",
+    accessorKey: "Created at",
     header: () => <span>Email</span>,
   },
   {
-    accessorKey: "date",
+    accessorKey: "Status",
     header: () => <span>Date</span>,
   },
 ];
 
-const Table = ({ newData }) => {
+const TableCampagins = ({ newData }) => {
   const table = useReactTable({
     data: newData,
     columns,
@@ -66,4 +65,4 @@ const Table = ({ newData }) => {
   );
 };
 
-export default Table;
+export default TableCampagins;

@@ -8,10 +8,9 @@ const NewUser = ({ submitUser }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log("DATASUBMIT", data);
+    console.log("DATASUBMIT: ", data);
     submitUser(data);
   };
-  console.log(errors);
 
   const emailRegex = new RegExp(
     /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/

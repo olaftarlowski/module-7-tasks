@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { clientAction } from "./server/server";
 import { default as api } from "./api/";
-import { Table, NewUser, Campaign, Navigation } from "./";
+import { TableUsers, NewUser, Campaign, Navigation } from "./";
 import { ContentWrapper } from "./styled-components/styles";
 
 const Main = () => {
@@ -50,7 +50,7 @@ const Main = () => {
           <button onClick={check}>check</button>
         </div>
         <Routes>
-          <Route path="/users" element={<Table newData={dataTable} />} />
+          <Route path="/users" element={<TableUsers newData={dataTable} />} />
           <Route
             path="/new-user"
             element={<NewUser submitUser={postUserHandler} />}

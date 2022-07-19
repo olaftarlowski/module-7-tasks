@@ -47,9 +47,23 @@ const postUser = async (userData) => {
     });
 };
 
+const getCampaigns = async () => {
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: API_KEY,
+  };
+
+  const res = await axios.get(`${API_URL}/campaigns`).catch((error) => {
+    console.log(error);
+  });
+
+  return res.data;
+};
+
 const apiCalls = {
   getData,
   postUser,
+  getCampaigns,
 };
 
 export default apiCalls;
