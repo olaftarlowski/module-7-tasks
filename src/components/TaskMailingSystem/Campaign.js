@@ -13,13 +13,20 @@ const Campaign = () => {
     getCampaignsHandler();
   }, []);
 
-  const dataTable = campaignsData.map((el) => el.fields);
+  const dataTable = campaignsData.map((el) => {
+    console.log(el.fields["Created at"])
+    return el.fields;
+  });
 
   return (
     <div>
       <h3>Campaign</h3>
       <div>
         <TableCampagins newData={dataTable} />
+      </div>
+      <div>
+        <h4>send mails</h4>
+        <button>get data</button>
       </div>
     </div>
   );
