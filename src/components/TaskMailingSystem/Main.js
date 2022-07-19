@@ -1,22 +1,29 @@
 import { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { clientAction } from "./server/server";
 import { default as api } from "./api/";
-import { Table, NewUser } from "./";
+import { Table, NewUser, Campaign, Navigation } from "./";
+import { ContentWrapper } from "./styled-components/styles";
 
 const Main = () => {
   const [userData, setUserData] = useState([]);
 
-  const getUserHandler = () => {
-    api.getData().then((response) => setUserData(response.data.records));
+  const getDataHandler = () => {
+    api.getData().then((data) => setUserData(data.records));
   };
 
   const postUserHandler = (userData) => {
     api.postUser(userData);
-    getUserHandler();
+    getDataHandler();
   };
 
   useEffect(() => {
-    getUserHandler();
+    getDataHandler();
   }, []);
 
   const check = () => {
@@ -34,17 +41,25 @@ const Main = () => {
   };
 
   return (
-    <div>
-      get mails
-      <button onClick={servHandler}>klik</button>
-      <button onClick={check}>check</button>
-      <div>
-        <NewUser submitUser={postUserHandler} />
-      </div>
-      <div>
-        <Table newData={dataTable} />
-      </div>
-    </div>
+    <Router>
+      <h2>Mailing system</h2>
+      <Navigation />
+      <ContentWrapper>
+        <div>
+          <button onClick={servHandler}>klik</button>
+          <button onClick={check}>check</button>
+        </div>
+        <Routes>
+          <Route path="/users" element={<Table newData={dataTable} />} />
+          <Route
+            path="/new-user"
+            element={<NewUser submitUser={postUserHandler} />}
+          />
+          <Route path="/campaign" element={<Campaign />} />
+          <Route path="*" element={<Navigate to="/users" replace />} />
+        </Routes>
+      </ContentWrapper>
+    </Router>
   );
 };
 

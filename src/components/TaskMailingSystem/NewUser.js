@@ -1,24 +1,5 @@
 import { useForm } from "react-hook-form";
-
-import styled from "styled-components";
-
-const FormWrapper = styled.form`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: flex-start;
-
-  p {
-    font-size: 16px;
-    margin: 0;
-  }
-
-  button {
-    width: 100px;
-    height: 100px;
-    font-size: 24px;
-  }
-`;
+import { FormWrapper } from "./styled-components/styles";
 
 const NewUser = ({ submitUser }) => {
   const {
@@ -27,7 +8,7 @@ const NewUser = ({ submitUser }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log("DATASUBMIT",data)
+    console.log("DATASUBMIT", data);
     submitUser(data);
   };
   console.log(errors);
@@ -41,7 +22,7 @@ const NewUser = ({ submitUser }) => {
       <div>
         <input
           type="text"
-          placeholder="name"
+          placeholder="Name"
           {...register("name", { required: true, maxLength: 80 })}
         />
         {errors.name && <p>Name is required</p>}
@@ -50,7 +31,7 @@ const NewUser = ({ submitUser }) => {
       <div>
         <input
           type="text"
-          placeholder="email"
+          placeholder="Email"
           {...register("email", { required: true, pattern: emailRegex })}
         />
         {errors.email && <p>Email is required</p>}

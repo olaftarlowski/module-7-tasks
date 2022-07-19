@@ -1,8 +1,8 @@
 import moment from "moment";
 import axios from "axios";
-const API_KEY = `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`;
 
-const API_URL = "https://api.airtable.com/v0/appLktO7FFmlPGju3/mails";
+const API_KEY = `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`;
+const API_URL = "https://api.airtable.com/v0/appLktO7FFmlPGju3";
 
 const getData = async () => {
   axios.defaults.headers = {
@@ -10,11 +10,11 @@ const getData = async () => {
     Authorization: API_KEY,
   };
 
-  const res = await axios.get(API_URL).catch((error) => {
+  const res = await axios.get(`${API_URL}/mails`).catch((error) => {
     console.log(error);
   });
 
-  return res;
+  return res.data;
 };
 
 const postUser = async (userData) => {
@@ -38,7 +38,7 @@ const postUser = async (userData) => {
   };
 
   await axios
-    .post(API_URL, data)
+    .post(`${API_URL}/mails`, data)
     .then(function (response) {
       console.log(response);
     })
