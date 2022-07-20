@@ -4,7 +4,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-const TableCampagins = ({ newData }) => {
+const TableCampagins = ({ newData, getRow }) => {
   const columns = [
     {
       accessorKey: "Name",
@@ -24,7 +24,13 @@ const TableCampagins = ({ newData }) => {
     },
     {
       accessorKey: "Controls",
-      cell: (props) => <button onClick={() => show(props.row.original)}>adass</button>,
+      cell: (props) => (
+        <div style={{ display: "flex" }}>
+          <button onClick={() => getRow(props.row.original)}>
+            Choose campaign
+          </button>
+        </div>
+      ),
     },
   ];
 
@@ -34,9 +40,9 @@ const TableCampagins = ({ newData }) => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const show = (data) => {
-    console.log(data);
-  };
+  // const show = (data) => {
+  //   console.log(data);
+  // };
 
   return (
     <div className="p-2">
