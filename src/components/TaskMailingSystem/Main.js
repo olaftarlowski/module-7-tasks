@@ -40,11 +40,11 @@ const Main = () => {
     <Router>
       <h2>Mailing system</h2>
       <Navigation />
+      <div>
+        <button onClick={servHandler}>klik</button>
+        <button onClick={check}>check</button>
+      </div>
       <ContentWrapper>
-        <div>
-          <button onClick={servHandler}>klik</button>
-          <button onClick={check}>check</button>
-        </div>
         <Routes>
           <Route path="/users" element={<TableUsers newData={dataTable} />} />
           <Route

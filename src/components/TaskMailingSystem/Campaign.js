@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { default as api } from "./api/";
-import { TableCampagins } from "./";
+import { TableCampaigns, CampaignForm } from "./";
+import { CampaignWrapper } from "./styled-components/styles";
 
 const Campaign = () => {
   const [campaignsData, setCampaignsData] = useState([]);
@@ -33,34 +34,10 @@ const Campaign = () => {
 
   return (
     <div>
-      <h3>Campaign</h3>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-        }}
-      >
-        <TableCampagins newData={dataTable} getRow={getRowHandler} />
-        <div>
-          <form
-            action=""
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <label htmlFor="">Title</label>
-            <input type="text" name="" id="" />
-            <label htmlFor="">Content</label>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-            <button>save</button>
-            <button type="submit">submit</button>
-          </form>
-        </div>
-      </div>
+      <CampaignWrapper>
+        <TableCampaigns newData={dataTable} getRow={getRowHandler} />
+        <CampaignForm />
+      </CampaignWrapper>
       <div
         style={{
           display: "flex",

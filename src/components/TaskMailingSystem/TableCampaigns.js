@@ -4,7 +4,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-const TableCampagins = ({ newData, getRow }) => {
+const TableCampaigns = ({ newData, getRow }) => {
   const columns = [
     {
       accessorKey: "Name",
@@ -79,4 +79,4 @@ const TableCampagins = ({ newData, getRow }) => {
   );
 };
 
-export default TableCampagins;
+export default TableCampaigns;

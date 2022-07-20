@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const NavigationWrapper = styled.nav`
-  /* border: 1px solid yellow; */
   padding: 12px 24px;
   display: flex;
   flex-direction: row;
@@ -49,4 +48,55 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 24px 0;
+`;
+
+export const CampaignWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
+export const CampaignFormWrapper = styled.div`
+  padding: 8px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      color: crimson;
+    }
+
+    input {
+      padding: 8px 16px;
+      font-size: 16px;
+    }
+
+    textarea {
+      padding: 8px 16px;
+      font-size: 16px;
+      height: 120px;
+    }
+
+    .control-buttons {
+      padding: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      button {
+        width: 100px;
+        height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        margin: 2px;
+      }
+    }
+  }
 `;
