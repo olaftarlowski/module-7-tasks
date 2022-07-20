@@ -32,11 +32,15 @@ const Campaign = () => {
     console.log(campaignRow);
   };
 
+  const engageMain = () => {
+    console.log("reddd");
+  };
+
   return (
     <div>
       <CampaignWrapper>
         <TableCampaigns newData={dataTable} getRow={getRowHandler} />
-        <CampaignForm />
+        <CampaignForm rowData={campaignRow} />
       </CampaignWrapper>
       <div
         style={{
