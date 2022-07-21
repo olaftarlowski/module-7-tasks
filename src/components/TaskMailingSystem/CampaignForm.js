@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import React, { useImperativeHandle } from "react";
 import { useForm } from "react-hook-form";
 import { CampaignFormWrapper } from "./styled-components/styles";
 
-const CampaignForm = ({ rowData }) => {
+const CampaignForm = React.forwardRef((props, ref) => {
   const {
     register,
     handleSubmit,
@@ -12,14 +12,23 @@ const CampaignForm = ({ rowData }) => {
 
   const onSubmit = (data) => console.log(data);
 
-  const check = (e) => {
+  const saveCurrentTemplate = (e) => {
     e.preventDefault();
-
-    setValue("details", {
-      titleText: rowData.Name,
-      content: rowData.Content,
-    });
+    console.log("saveCurrentTemplate");
   };
+
+  useImperativeHandle(ref, () => ({
+    applyRowHandler(rowData) {
+      setValue(
+        "details",
+        {
+          titleText: rowData.Name,
+          content: rowData.Content,
+        },
+        { shouldValidate: true }
+      );
+    },
+  }));
 
   return (
     <CampaignFormWrapper>
@@ -35,7 +44,7 @@ const CampaignForm = ({ rowData }) => {
             maxLength: 80,
           })}
         />
-        {errors.titleText && <p>Title is required</p>}
+        {errors.details?.titleText && <p>Title is required</p>}
 
         <label htmlFor="content">Content</label>
         <textarea
@@ -46,10 +55,10 @@ const CampaignForm = ({ rowData }) => {
             maxLength: 300,
           })}
         />
-        {errors.content && <p>Content is required</p>}
+        {errors.details?.content && <p>Content is required</p>}
 
         <div className="control-buttons">
-          <button onClick={check}>Apply</button>
+          <button onClick={saveCurrentTemplate}>Save</button>
           <button type="submit" onClick={handleSubmit(onSubmit)}>
             Send
           </button>
@@ -57,6 +66,6 @@ const CampaignForm = ({ rowData }) => {
       </form>
     </CampaignFormWrapper>
   );
-};
+});
 
 export default CampaignForm;
