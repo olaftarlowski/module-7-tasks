@@ -40,10 +40,6 @@ const TableCampaigns = ({ newData, getRow }) => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  // const show = (data) => {
-  //   console.log(data);
-  // };
-
   return (
     <div className="p-2">
       <table>

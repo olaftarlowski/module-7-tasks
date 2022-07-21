@@ -1,5 +1,6 @@
 import React, { useImperativeHandle } from "react";
 import { useForm } from "react-hook-form";
+import { clientAction } from "./server/server";
 import { CampaignFormWrapper } from "./styled-components/styles";
 
 const CampaignForm = React.forwardRef(({ dataNames }, ref) => {
@@ -13,11 +14,15 @@ const CampaignForm = React.forwardRef(({ dataNames }, ref) => {
   const onSubmit = ({ details }) => {
     const allMails = dataNames.map((mail) => {
       return {
-        emailTo: mail.fields.email,
-        title: details.titleText.replace("{{ name }}", mail.fields.name),
-        body: details.content,
+        from: "Excited User <bobr.rozrabiaka123@gmail.com>",
+        to: mail.fields.email,
+        subject: details.titleText.replace("{{ name }}", mail.fields.name),
+        text: details.content,
       };
     });
+
+    allMails.map((el) => clientAction(el));
+
     console.log(allMails);
   };
 

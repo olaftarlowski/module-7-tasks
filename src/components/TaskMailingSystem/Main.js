@@ -5,7 +5,6 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { clientAction } from "./server/server";
 import { default as api } from "./api/";
 import { TableUsers, NewUser, Campaign, Navigation } from "./";
 import { ContentWrapper } from "./styled-components/styles";
@@ -26,25 +25,12 @@ const Main = () => {
     getDataHandler();
   }, []);
 
-  const check = () => {
-    console.log(userData);
-  };
-
   const dataTable = userData.map((el) => el.fields);
-  // const dataNames = userData.map((el) => el.fields.name);
-
-  const servHandler = () => {
-    clientAction();
-  };
 
   return (
     <Router>
       <h2>Mailing system</h2>
       <Navigation />
-      <div>
-        <button onClick={servHandler}>klik</button>
-        <button onClick={check}>check</button>
-      </div>
       <ContentWrapper>
         <Routes>
           <Route path="/users" element={<TableUsers newData={dataTable} />} />
@@ -52,10 +38,7 @@ const Main = () => {
             path="/new-user"
             element={<NewUser submitUser={postUserHandler} />}
           />
-          <Route
-            path="/campaign"
-            element={<Campaign dataNames={userData} />}
-          />
+          <Route path="/campaign" element={<Campaign dataNames={userData} />} />
           <Route path="*" element={<Navigate to="/users" replace />} />
         </Routes>
       </ContentWrapper>
