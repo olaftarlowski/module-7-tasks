@@ -4,7 +4,7 @@ import { default as api } from "./api/";
 import { TableCampaigns, CampaignForm } from "./";
 import { CampaignWrapper } from "./styled-components/styles";
 
-const Campaign = ({dataNames}) => {
+const Campaign = ({ dataNames }) => {
   const [campaignsData, setCampaignsData] = useState([]);
 
   const getCampaignsHandler = () => {
@@ -33,17 +33,8 @@ const Campaign = ({dataNames}) => {
     <div>
       <CampaignWrapper>
         <TableCampaigns newData={dataTable} getRow={getRowHandler} />
-        <CampaignForm ref={myRef} dataNames={dataNames}/>
+        <CampaignForm ref={myRef} dataNames={dataNames} />
       </CampaignWrapper>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-        }}
-      >
-        <h4>send mails</h4>
-      </div>
     </div>
   );
 };

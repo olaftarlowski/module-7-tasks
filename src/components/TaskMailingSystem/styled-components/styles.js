@@ -43,7 +43,7 @@ export const FormWrapper = styled.form`
 `;
 
 export const ContentWrapper = styled.div`
-  width: 1000px;
+  width: 95%;
   display: flex;
   flex-direction: column;
   justify-content: center;
