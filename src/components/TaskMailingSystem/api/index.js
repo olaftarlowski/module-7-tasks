@@ -64,10 +64,39 @@ const getCampaigns = async () => {
   return res.data;
 };
 
+const postCampaign = async (campaignData) => {
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: API_KEY,
+  };
+
+  const data = {
+    records: [
+      {
+        fields: {
+          Name: campaignData.details.titleText,
+          Content: campaignData.details.content,
+          Status: campaignData.details.status,
+        },
+      },
+    ],
+  };
+  console.log(data);
+  await axios
+    .post(`${API_URL}/campaigns`, data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
 const apiCalls = {
   getData,
   postUser,
   getCampaigns,
+  postCampaign,
 };
 
 export default apiCalls;

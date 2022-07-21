@@ -1,34 +1,47 @@
-import React, { useImperativeHandle } from "react";
+import React, { useEffect, useImperativeHandle, useState } from "react";
 import { useForm } from "react-hook-form";
+import { default as api } from "./api/";
 import { clientAction } from "./server/server";
 import { CampaignFormWrapper } from "./styled-components/styles";
 
 const CampaignForm = React.forwardRef(({ dataNames }, ref) => {
+  const [currentWatch, setCurrentWatch] = useState([]);
+
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = ({ details }) => {
+  useEffect(() => {
+    const subscription = watch((data) => setCurrentWatch(data));
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
+  const onSubmit = (data) => {
     const allMails = dataNames.map((mail) => {
       return {
         from: "Excited User <bobr.rozrabiaka123@gmail.com>",
         to: mail.fields.email,
-        subject: details.titleText.replace("{{ name }}", mail.fields.name),
-        text: details.content,
+        subject: data.details.titleText.replace("{{ name }}", mail.fields.name),
+        text: data.details.content,
       };
     });
 
     allMails.map((el) => clientAction(el));
 
+    data.details.status = "Done";
+    api.postCampaign(data);
+
     console.log(allMails);
   };
 
-  const saveCurrentTemplate = (e) => {
+  const saveNewCampaignHandler = (e) => {
     e.preventDefault();
-    console.log("saveCurrentTemplate");
+    currentWatch.details.status = "In progress";
+    api.postCampaign(currentWatch);
   };
 
   useImperativeHandle(ref, () => ({
@@ -72,7 +85,7 @@ const CampaignForm = React.forwardRef(({ dataNames }, ref) => {
         {errors.details?.content && <p>Content is required</p>}
 
         <div className="control-buttons">
-          <button onClick={saveCurrentTemplate}>Save</button>
+          <button onClick={saveNewCampaignHandler}>Save</button>
           <button type="submit" onClick={handleSubmit(onSubmit)}>
             Send
           </button>
