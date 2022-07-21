@@ -4,7 +4,7 @@ import { default as api } from "./api/";
 import { TableCampaigns, CampaignForm } from "./";
 import { CampaignWrapper } from "./styled-components/styles";
 
-const Campaign = () => {
+const Campaign = ({dataNames}) => {
   const [campaignsData, setCampaignsData] = useState([]);
 
   const getCampaignsHandler = () => {
@@ -33,7 +33,7 @@ const Campaign = () => {
     <div>
       <CampaignWrapper>
         <TableCampaigns newData={dataTable} getRow={getRowHandler} />
-        <CampaignForm ref={myRef} />
+        <CampaignForm ref={myRef} dataNames={dataNames}/>
       </CampaignWrapper>
       <div
         style={{

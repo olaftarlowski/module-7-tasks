@@ -2,7 +2,7 @@ import React, { useImperativeHandle } from "react";
 import { useForm } from "react-hook-form";
 import { CampaignFormWrapper } from "./styled-components/styles";
 
-const CampaignForm = React.forwardRef((props, ref) => {
+const CampaignForm = React.forwardRef(({ dataNames }, ref) => {
   const {
     register,
     handleSubmit,
@@ -10,7 +10,16 @@ const CampaignForm = React.forwardRef((props, ref) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = ({ details }) => {
+    const allMails = dataNames.map((mail) => {
+      return {
+        emailTo: mail.fields.email,
+        title: details.titleText.replace("{{ name }}", mail.fields.name),
+        body: details.content,
+      };
+    });
+    console.log(allMails);
+  };
 
   const saveCurrentTemplate = (e) => {
     e.preventDefault();

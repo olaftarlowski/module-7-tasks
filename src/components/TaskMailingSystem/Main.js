@@ -31,6 +31,7 @@ const Main = () => {
   };
 
   const dataTable = userData.map((el) => el.fields);
+  // const dataNames = userData.map((el) => el.fields.name);
 
   const servHandler = () => {
     clientAction();
@@ -51,7 +52,10 @@ const Main = () => {
             path="/new-user"
             element={<NewUser submitUser={postUserHandler} />}
           />
-          <Route path="/campaign" element={<Campaign />} />
+          <Route
+            path="/campaign"
+            element={<Campaign dataNames={userData} />}
+          />
           <Route path="*" element={<Navigate to="/users" replace />} />
         </Routes>
       </ContentWrapper>
