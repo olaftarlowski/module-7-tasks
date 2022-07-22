@@ -11,9 +11,13 @@ import { ContentWrapper } from "./styled-components/styles";
 
 const Main = () => {
   const [userData, setUserData] = useState([]);
+  const [campaignsData, setCampaignsData] = useState([]);
 
   const getDataHandler = () => {
     api.getData().then((data) => setUserData(data.records));
+    api.getCampaigns().then((data) => {
+      setCampaignsData(data.records);
+    });
   };
 
   const postUserHandler = (userData) => {
@@ -38,7 +42,12 @@ const Main = () => {
             path="/new-user"
             element={<NewUser submitUser={postUserHandler} />}
           />
-          <Route path="/campaign" element={<Campaign dataNames={userData} />} />
+          <Route
+            path="/campaign"
+            element={
+              <Campaign campaignsData={campaignsData} dataNames={userData} />
+            }
+          />
           <Route path="*" element={<Navigate to="/users" replace />} />
         </Routes>
       </ContentWrapper>
