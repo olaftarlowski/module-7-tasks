@@ -4,8 +4,9 @@ import { default as api } from "./api/";
 import { clientAction } from "./server/server";
 import { CampaignFormWrapper } from "./styled-components/styles";
 
-const CampaignForm = React.forwardRef(({ dataNames }, ref) => {
+const CampaignForm = React.forwardRef(({ dataNames, dataTable }, ref) => {
   const [currentWatch, setCurrentWatch] = useState([]);
+  const [currentID, setCurrentID] = useState(null)
 
   const {
     register,
@@ -20,6 +21,8 @@ const CampaignForm = React.forwardRef(({ dataNames }, ref) => {
     return () => subscription.unsubscribe();
   }, [watch]);
 
+  console.log("dataTable",dataTable)
+
   const onSubmit = (data) => {
     const allMails = dataNames.map((mail) => {
       return {
@@ -32,20 +35,29 @@ const CampaignForm = React.forwardRef(({ dataNames }, ref) => {
 
     allMails.map((el) => clientAction(el));
 
+    // console.log(dataNames.fields.id)
+    // if (data.fields.id) {
+      
+    // }\\
+    const currentIDs = dataTable.map(el => el.id)
+    console.log("IDSIDSIDSIDS", currentIDs)
+
     data.details.status = "Done";
     api.postCampaign(data);
 
-    console.log(allMails);
+    // console.log(allMails);
   };
 
   const saveNewCampaignHandler = (e) => {
     e.preventDefault();
-    currentWatch.details.status = "In progress";
-    api.postCampaign(currentWatch);
+    // currentWatch.details.status = "In progress";
+    // api.postCampaign(currentWatch);
+    api.patchCampaign(currentWatch);
   };
 
   useImperativeHandle(ref, () => ({
     applyRowHandler(rowData) {
+      setCurrentID(rowData.id)
       setValue(
         "details",
         {
@@ -59,6 +71,7 @@ const CampaignForm = React.forwardRef(({ dataNames }, ref) => {
 
   return (
     <CampaignFormWrapper>
+      {/* <button onClick={CHECKID}>CHECK</button> */}
       <form>
         <label htmlFor="titleText">Title</label>
         <input

@@ -8,7 +8,9 @@ const Campaign = ({ dataNames }) => {
   const [campaignsData, setCampaignsData] = useState([]);
 
   const getCampaignsHandler = () => {
-    api.getCampaigns().then((data) => setCampaignsData(data.records));
+    api.getCampaigns().then((data) => {
+      setCampaignsData(data.records);
+    });
   };
 
   useEffect(() => {
@@ -20,6 +22,7 @@ const Campaign = ({ dataNames }) => {
       "YYYY-MM-DD HH:mm:ss"
     );
     el.fields["Created at"] = newDate;
+    el.fields.id = el.id;
     return el.fields;
   });
 
@@ -33,7 +36,7 @@ const Campaign = ({ dataNames }) => {
     <div>
       <CampaignWrapper>
         <TableCampaigns newData={dataTable} getRow={getRowHandler} />
-        <CampaignForm ref={myRef} dataNames={dataNames} />
+        <CampaignForm ref={myRef} dataNames={dataNames} dataTable={dataTable}/>
       </CampaignWrapper>
     </div>
   );

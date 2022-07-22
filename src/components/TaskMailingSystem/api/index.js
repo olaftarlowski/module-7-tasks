@@ -38,15 +38,15 @@ const postUser = async (userData) => {
       },
     ],
   };
-
-  await axios
-    .post(`${API_URL}/mails`, data)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  console.log(data);
+  // await axios
+  //   .post(`${API_URL}/mails`, data)
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
 };
 
 const getCampaigns = async () => {
@@ -82,8 +82,35 @@ const postCampaign = async (campaignData) => {
     ],
   };
   console.log(data);
+  // await axios
+  //   .post(`${API_URL}/campaigns`, data)
+  //   .then(function (response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function (error) {
+  //     console.log(error);
+  //   });
+};
+
+const patchCampaign = async (campaignData) => {
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: API_KEY,
+  };
+
+  const data = {
+    records: [
+      {
+        id: "reciEVDXtkT6sGi87",
+        fields: {
+          Status: "Done",
+        },
+      },
+    ],
+  };
+  console.log(data);
   await axios
-    .post(`${API_URL}/campaigns`, data)
+    .patch(`${API_URL}/campaigns`, data)
     .then(function (response) {
       console.log(response);
     })
@@ -97,6 +124,7 @@ const apiCalls = {
   postUser,
   getCampaigns,
   postCampaign,
+  patchCampaign,
 };
 
 export default apiCalls;
