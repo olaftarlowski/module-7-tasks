@@ -6,7 +6,8 @@ import { CampaignFormWrapper } from "./styled-components/styles";
 
 const CampaignForm = React.forwardRef(({ dataNames, dataTable }, ref) => {
   const [currentWatch, setCurrentWatch] = useState([]);
-  const [currentID, setCurrentID] = useState(null)
+  const [currentID, setCurrentID] = useState(null);
+  const currentIDdata = dataTable.map((el) => el.id);
 
   const {
     register,
@@ -21,48 +22,44 @@ const CampaignForm = React.forwardRef(({ dataNames, dataTable }, ref) => {
     return () => subscription.unsubscribe();
   }, [watch]);
 
-  console.log("dataTable",dataTable)
-
-  const onSubmit = (data) => {
-    const allMails = dataNames.map((mail) => {
+  const onSubmit = ({ details }) => {
+    const allMails = dataNames.map(({ fields }) => {
       return {
         from: "Excited User <bobr.rozrabiaka123@gmail.com>",
-        to: mail.fields.email,
-        subject: data.details.titleText.replace("{{ name }}", mail.fields.name),
-        text: data.details.content,
+        to: fields.email,
+        subject: details.titleText.replace("{{ name }}", fields.name),
+        text: details.content,
       };
     });
 
     allMails.map((el) => clientAction(el));
 
-    // console.log(dataNames.fields.id)
-    // if (data.fields.id) {
-      
-    // }\\
-    const currentIDs = dataTable.map(el => el.id)
-    console.log("IDSIDSIDSIDS", currentIDs)
-
-    data.details.status = "Done";
-    api.postCampaign(data);
+    if (currentIDdata.includes(currentID)) {
+      currentWatch.details.status = "Done";
+      currentWatch.details.id = currentID;
+      api.patchCampaign(currentWatch);
+    } else {
+      details.status = "Done";
+      api.postCampaign(details);
+    }
 
     // console.log(allMails);
   };
 
   const saveNewCampaignHandler = (e) => {
     e.preventDefault();
-    // currentWatch.details.status = "In progress";
-    // api.postCampaign(currentWatch);
-    api.patchCampaign(currentWatch);
+    currentWatch.details.status = "In progress";
+    api.postCampaign(currentWatch);
   };
 
   useImperativeHandle(ref, () => ({
-    applyRowHandler(rowData) {
-      setCurrentID(rowData.id)
+    applyRowHandler({ id, Name, Content }) {
+      setCurrentID(id);
       setValue(
         "details",
         {
-          titleText: rowData.Name,
-          content: rowData.Content,
+          titleText: Name,
+          content: Content,
         },
         { shouldValidate: true }
       );
@@ -71,7 +68,6 @@ const CampaignForm = React.forwardRef(({ dataNames, dataTable }, ref) => {
 
   return (
     <CampaignFormWrapper>
-      {/* <button onClick={CHECKID}>CHECK</button> */}
       <form>
         <label htmlFor="titleText">Title</label>
         <input

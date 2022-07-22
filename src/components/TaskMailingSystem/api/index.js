@@ -19,7 +19,7 @@ const getData = async () => {
   return res.data;
 };
 
-const postUser = async (userData) => {
+const postUser = async ({ name, email }) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: API_KEY,
@@ -31,22 +31,22 @@ const postUser = async (userData) => {
     records: [
       {
         fields: {
-          name: userData.name,
-          email: userData.email,
+          name: name,
+          email: email,
           date: newDate,
         },
       },
     ],
   };
-  console.log(data);
-  // await axios
-  //   .post(`${API_URL}/mails`, data)
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
+
+  await axios
+    .post(`${API_URL}/mails`, data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };
 
 const getCampaigns = async () => {
@@ -64,7 +64,7 @@ const getCampaigns = async () => {
   return res.data;
 };
 
-const postCampaign = async (campaignData) => {
+const postCampaign = async ({ details }) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: API_KEY,
@@ -74,25 +74,25 @@ const postCampaign = async (campaignData) => {
     records: [
       {
         fields: {
-          Name: campaignData.details.titleText,
-          Content: campaignData.details.content,
-          Status: campaignData.details.status,
+          Name: details.titleText,
+          Content: details.content,
+          Status: details.status,
         },
       },
     ],
   };
-  console.log(data);
-  // await axios
-  //   .post(`${API_URL}/campaigns`, data)
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
+
+  await axios
+    .post(`${API_URL}/campaigns`, data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };
 
-const patchCampaign = async (campaignData) => {
+const patchCampaign = async ({ details }) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: API_KEY,
@@ -101,14 +101,16 @@ const patchCampaign = async (campaignData) => {
   const data = {
     records: [
       {
-        id: "reciEVDXtkT6sGi87",
+        id: details.id,
         fields: {
-          Status: "Done",
+          Name: details.titleText,
+          Content: details.content,
+          Status: details.status,
         },
       },
     ],
   };
-  console.log(data);
+
   await axios
     .patch(`${API_URL}/campaigns`, data)
     .then(function (response) {
