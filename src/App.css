@@ -17,7 +17,8 @@ tbody {
   border-bottom: 1px solid lightgray;
 }
 
-th, td {
+th,
+td {
   border-bottom: 1px solid lightgray;
   border-right: 1px solid lightgray;
   padding: 2px 4px;
@@ -31,4 +32,29 @@ tfoot th {
   font-weight: normal;
 }
 
+.snackbar-wrapper-top-left,
+.snackbar-wrapper-top-center,
+.snackbar-wrapper-top-right {
+  top: 20px;
+}
 
+.snackbar-wrapper-bottom-left,
+.snackbar-wrapper-bottom-center,
+.snackbar-wrapper-bottom-right {
+  bottom: 20px;
+}
+
+.snackbar-wrapper-top-left,
+.snackbar-wrapper-bottom-left {
+  justify-content: flex-start;
+}
+
+.snackbar-wrapper-top-center,
+.snackbar-wrapper-bottom-center {
+  justify-content: center;
+}
+
+.snackbar-wrapper-top-right,
+.snackbar-wrapper-bottom-right {
+  justify-content: flex-end;
+}

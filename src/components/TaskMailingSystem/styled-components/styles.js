@@ -100,3 +100,19 @@ export const CampaignFormWrapper = styled.div`
     }
   }
 `;
+
+export const SnackbarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  transition: opacity 150ms, transform 150ms;
+  span {
+    background-color: #fff;
+    color: #000;
+    padding: 24px;
+  }
+`;

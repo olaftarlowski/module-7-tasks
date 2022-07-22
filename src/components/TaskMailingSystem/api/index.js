@@ -64,7 +64,7 @@ const getCampaigns = async () => {
   return res.data;
 };
 
-const postCampaign = async ({ details }) => {
+const postCampaign = async ({ titleText, content, status }) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: API_KEY,
@@ -74,9 +74,9 @@ const postCampaign = async ({ details }) => {
     records: [
       {
         fields: {
-          Name: details.titleText,
-          Content: details.content,
-          Status: details.status,
+          Name: titleText,
+          Content: content,
+          Status: status,
         },
       },
     ],

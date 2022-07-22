@@ -2,11 +2,13 @@ import React, { useEffect, useImperativeHandle, useState } from "react";
 import { useForm } from "react-hook-form";
 import { default as api } from "./api/";
 import { clientAction } from "./server/server";
+import { Snackbar } from "./Snackbar";
 import { CampaignFormWrapper } from "./styled-components/styles";
 
 const CampaignForm = React.forwardRef(({ dataNames, dataTable }, ref) => {
   const [currentWatch, setCurrentWatch] = useState([]);
   const [currentID, setCurrentID] = useState(null);
+  const [isSnackbarActive, setIsSnackbarActive] = useState(false);
   const currentIDdata = dataTable.map((el) => el.id);
 
   const {
@@ -14,6 +16,7 @@ const CampaignForm = React.forwardRef(({ dataNames, dataTable }, ref) => {
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -43,11 +46,16 @@ const CampaignForm = React.forwardRef(({ dataNames, dataTable }, ref) => {
       api.postCampaign(details);
     }
 
-    // console.log(allMails);
+    reset();
+    setCurrentID("");
+    setIsSnackbarActive(true);
   };
 
   const saveNewCampaignHandler = (e) => {
     e.preventDefault();
+    if (currentWatch.length === 0) {
+      return;
+    }
     currentWatch.details.status = "In progress";
     api.postCampaign(currentWatch);
   };
@@ -68,6 +76,10 @@ const CampaignForm = React.forwardRef(({ dataNames, dataTable }, ref) => {
 
   return (
     <CampaignFormWrapper>
+      <Snackbar
+        isSnackbarActive={isSnackbarActive}
+        setIsSnackbarActive={setIsSnackbarActive}
+      />
       <form>
         <label htmlFor="titleText">Title</label>
         <input
