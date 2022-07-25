@@ -19,6 +19,19 @@ const getData = async () => {
   return res.data;
 };
 
+const getSingleUser = async (id) => {
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: API_KEY,
+  };
+
+  const res = await axios.get(`${API_URL}/mails/${id}`).catch((error) => {
+    console.log(error);
+  });
+
+  return res;
+};
+
 const postUser = async ({ name, email }) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
@@ -142,6 +155,7 @@ const deleteCampaign = async (id) => {
 const apiCalls = {
   getData,
   postUser,
+  getSingleUser,
   getCampaigns,
   postCampaign,
   patchCampaign,

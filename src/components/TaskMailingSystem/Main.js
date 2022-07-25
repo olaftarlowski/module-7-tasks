@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { default as api } from "./api/";
-import { TableUsers, NewUser, Campaign, Navigation } from "./";
+import { TableUsers, NewUser, Campaign, Navigation, SingleUser } from "./";
 import { ContentWrapper } from "./styled-components/styles";
 
 const Main = () => {
@@ -29,7 +29,10 @@ const Main = () => {
     getDataHandler();
   }, []);
 
-  const dataTable = userData.map((el) => el.fields);
+  const dataTable = userData.map((el) => {
+    el.fields.id = el.id;
+    return el.fields;
+  });
 
   return (
     <Router>
@@ -52,6 +55,7 @@ const Main = () => {
               />
             }
           />
+          <Route path="/users/:id" element={<SingleUser />} />
           <Route path="*" element={<Navigate to="/users" replace />} />
         </Routes>
       </ContentWrapper>

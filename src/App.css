@@ -24,6 +24,13 @@ td {
   padding: 2px 4px;
 }
 
+tbody > tr > td > a {
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  color: #fff;
+}
+
 tfoot {
   color: gray;
 }

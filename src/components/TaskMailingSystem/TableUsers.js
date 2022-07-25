@@ -4,12 +4,9 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Link } from "react-router-dom";
 
 const columns = [
-  {
-    accessorKey: "id",
-    header: () => <span>ID</span>,
-  },
   {
     accessorKey: "name",
     header: () => <span>Name</span>,
@@ -55,7 +52,9 @@ const TableUsers = ({ newData }) => {
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  <Link to={`/users/${row.original.id}`}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </Link>
                 </td>
               ))}
             </tr>

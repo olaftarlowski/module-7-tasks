@@ -116,3 +116,20 @@ export const SnackbarWrapper = styled.div`
     padding: 24px;
   }
 `;
+
+export const SingleUserWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  border: 1px solid lightgray;
+  color: #fff;
+  background-color: #474747;
+
+  button {
+    width: 160px;
+    height: 74px;
+    font-size: 24px;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+`;
