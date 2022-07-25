@@ -1,5 +1,6 @@
 import React, { useEffect, useImperativeHandle, useState } from "react";
 import { useForm } from "react-hook-form";
+import PropTypes from "prop-types";
 import { default as api } from "./api/";
 import { clientAction } from "./server/server";
 import { Snackbar } from "./Snackbar";
@@ -127,5 +128,11 @@ const CampaignForm = React.forwardRef(
     );
   }
 );
+
+CampaignForm.propTypes = {
+  dataNames: PropTypes.array,
+  dataTable: PropTypes.array,
+  refetchCampaigns: PropTypes.func,
+};
 
 export default CampaignForm;

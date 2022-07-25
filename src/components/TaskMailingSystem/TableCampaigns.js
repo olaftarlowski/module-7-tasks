@@ -3,6 +3,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import PropTypes from "prop-types";
 
 const TableCampaigns = ({ newData, getRow, deleteRowHandler }) => {
   const columns = [
@@ -84,6 +85,12 @@ const TableCampaigns = ({ newData, getRow, deleteRowHandler }) => {
       </table>
     </div>
   );
+};
+
+TableCampaigns.propTypes = {
+  newData: PropTypes.array,
+  getRow: PropTypes.func,
+  deleteRowHandler: PropTypes.func,
 };
 
 export default TableCampaigns;

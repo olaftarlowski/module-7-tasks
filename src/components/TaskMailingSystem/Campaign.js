@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import PropTypes from "prop-types";
 import moment from "moment";
 import { default as api } from "./api/";
 import { TableCampaigns, CampaignForm } from "./";
@@ -42,6 +43,12 @@ const Campaign = ({ dataNames, campaignsData, refetchCampaigns }) => {
       </CampaignWrapper>
     </div>
   );
+};
+
+Campaign.propTypes = {
+  dataNames: PropTypes.array,
+  campaignsData: PropTypes.array,
+  refetchCampaigns: PropTypes.func,
 };
 
 export default Campaign;

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import PropTypes from "prop-types";
 import { SnackbarWrapper } from "../styled-components/styles";
 
 const SnackbarItem = ({ setSnackbar, toFadeOut, position }) => {
@@ -15,6 +16,12 @@ const SnackbarItem = ({ setSnackbar, toFadeOut, position }) => {
       <span>Data submitted. Thank you!</span>
     </SnackbarWrapper>
   );
+};
+
+SnackbarItem.propTypes = {
+  setSnackbar: PropTypes.func,
+  toFadeOut: PropTypes.number,
+  position: PropTypes.string,
 };
 
 export default SnackbarItem;

@@ -5,6 +5,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const columns = [
   {
@@ -63,6 +64,10 @@ const TableUsers = ({ newData }) => {
       </table>
     </div>
   );
+};
+
+TableUsers.propTypes = {
+  newData: PropTypes.array,
 };
 
 export default TableUsers;
