@@ -1,18 +1,26 @@
+import { useState, useEffect } from "react";
 import "./App.css";
-// import BasicTable from "./components/TABLELEARN/BasicTable";
-import { Main } from "./components/TaskMailingSystem";
-// import Table from "./components/TaskMailingSystem/Table";
+import { Main, Login } from "./components/TaskMailingSystem";
 // import { UserList } from "./components/Task1/";
 
-function App() {
+const App = () => {
+  const [isVerified, setIsVerified] = useState(false);
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("logged");
+
+    if (loggedIn === "1") {
+      setIsVerified(true);
+    }
+  }, []);
+
   return (
     <div className="App App-header">
       {/* <UserList /> */}
-      <Main />
-      {/* <Table /> */}
-      {/* <BasicTable /> */}
+      {!isVerified && <Login setIsVerified={setIsVerified} />}
+      {isVerified && <Main setIsVerified={setIsVerified} />}
     </div>
   );
-}
+};
 
 export default App;

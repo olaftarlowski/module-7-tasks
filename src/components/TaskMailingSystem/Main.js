@@ -5,11 +5,12 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import PropTypes from "prop-types";
 import { default as api } from "./api/";
 import { TableUsers, NewUser, Campaign, Navigation, SingleUser } from "./";
 import { ContentWrapper } from "./styled-components/styles";
 
-const Main = () => {
+const Main = ({ setIsVerified }) => {
   const [userData, setUserData] = useState([]);
   const [campaignsData, setCampaignsData] = useState([]);
 
@@ -37,7 +38,7 @@ const Main = () => {
   return (
     <Router>
       <h2>Mailing system</h2>
-      <Navigation />
+      <Navigation setIsVerified={setIsVerified} />
       <ContentWrapper>
         <Routes>
           <Route path="/users" element={<TableUsers newData={dataTable} />} />
@@ -61,6 +62,10 @@ const Main = () => {
       </ContentWrapper>
     </Router>
   );
+};
+
+Main.propTypes = {
+  setIsVerified: PropTypes.func,
 };
 
 export default Main;

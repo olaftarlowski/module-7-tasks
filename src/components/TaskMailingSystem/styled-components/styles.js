@@ -6,13 +6,23 @@ export const NavigationWrapper = styled.nav`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  font-size: 24px;
 
-  .links a {
+  .links a,
+  button {
     padding: 10px 20px;
     border: 1px solid lightgray;
     text-decoration: none;
     color: #fff;
     background-color: #474747;
+  }
+
+  button {
+    font-size: 24px;
+    height: 54px;
+    box-sizing: border-box;
+    margin-left: 45px;
+    cursor: pointer;
   }
 `;
 
