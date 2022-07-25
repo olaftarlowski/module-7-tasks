@@ -123,12 +123,29 @@ const patchCampaign = async ({
     });
 };
 
+const deleteCampaign = async (id) => {
+  axios.defaults.headers = {
+    "Content-Type": "application/json",
+    Authorization: API_KEY,
+  };
+
+  await axios
+    .delete(`${API_URL}/campaigns/${id}`)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+
 const apiCalls = {
   getData,
   postUser,
   getCampaigns,
   postCampaign,
   patchCampaign,
+  deleteCampaign,
 };
 
 export default apiCalls;

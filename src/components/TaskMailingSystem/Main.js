@@ -45,7 +45,11 @@ const Main = () => {
           <Route
             path="/campaign"
             element={
-              <Campaign campaignsData={campaignsData} dataNames={userData} />
+              <Campaign
+                refetchCampaigns={getDataHandler}
+                campaignsData={campaignsData}
+                dataNames={userData}
+              />
             }
           />
           <Route path="*" element={<Navigate to="/users" replace />} />

@@ -4,7 +4,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-const TableCampaigns = ({ newData, getRow }) => {
+const TableCampaigns = ({ newData, getRow, deleteRowHandler }) => {
   const columns = [
     {
       accessorKey: "Name",
@@ -26,8 +26,19 @@ const TableCampaigns = ({ newData, getRow }) => {
       accessorKey: "Controls",
       cell: (props) => (
         <div style={{ display: "flex" }}>
-          <button onClick={() => getRow(props.row.original)}>
+          <button
+            disabled={props.row.original.Status === "Done" ? true : false}
+            onClick={() => getRow(props.row.original)}
+          >
             Choose campaign
+          </button>
+          <button
+            disabled={
+              props.row.original.Status === "In progress" ? false : true
+            }
+            onClick={() => deleteRowHandler(props.row.original.id)}
+          >
+            Delete row
           </button>
         </div>
       ),
