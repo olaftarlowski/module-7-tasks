@@ -92,7 +92,9 @@ const postCampaign = async ({ titleText, content, status }) => {
     });
 };
 
-const patchCampaign = async ({ details }) => {
+const patchCampaign = async ({
+  details: { id, titleText, content, status },
+}) => {
   axios.defaults.headers = {
     "Content-Type": "application/json",
     Authorization: API_KEY,
@@ -101,11 +103,11 @@ const patchCampaign = async ({ details }) => {
   const data = {
     records: [
       {
-        id: details.id,
+        id: id,
         fields: {
-          Name: details.titleText,
-          Content: details.content,
-          Status: details.status,
+          Name: titleText,
+          Content: content,
+          Status: status,
         },
       },
     ],

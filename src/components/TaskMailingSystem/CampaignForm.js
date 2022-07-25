@@ -25,6 +25,20 @@ const CampaignForm = React.forwardRef(({ dataNames, dataTable }, ref) => {
     return () => subscription.unsubscribe();
   }, [watch]);
 
+  const dataRequest = (detailsData, statusText) => {
+    if (currentIDdata.includes(currentID)) {
+      currentWatch.details.status = statusText;
+      currentWatch.details.id = currentID;
+      api.patchCampaign(currentWatch);
+    } else {
+      detailsData.status = statusText;
+      api.postCampaign(detailsData);
+    }
+    reset();
+    setCurrentID("");
+    setIsSnackbarActive(true);
+  };
+
   const onSubmit = ({ details }) => {
     const allMails = dataNames.map(({ fields }) => {
       return {
@@ -37,27 +51,17 @@ const CampaignForm = React.forwardRef(({ dataNames, dataTable }, ref) => {
 
     allMails.map((el) => clientAction(el));
 
-    if (currentIDdata.includes(currentID)) {
-      currentWatch.details.status = "Done";
-      currentWatch.details.id = currentID;
-      api.patchCampaign(currentWatch);
-    } else {
-      details.status = "Done";
-      api.postCampaign(details);
-    }
-
-    reset();
-    setCurrentID("");
-    setIsSnackbarActive(true);
+    dataRequest(details, "Done");
+    console.log("Mails sent", allMails);
   };
 
   const saveNewCampaignHandler = (e) => {
     e.preventDefault();
     if (currentWatch.length === 0) {
       return;
+    } else {
+      dataRequest(null, "In progress");
     }
-    currentWatch.details.status = "In progress";
-    api.postCampaign(currentWatch);
   };
 
   useImperativeHandle(ref, () => ({
