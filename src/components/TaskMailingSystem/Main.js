@@ -7,7 +7,9 @@ import {
 } from "react-router-dom";
 import PropTypes from "prop-types";
 import { default as api } from "./api/";
-import { TableUsers, NewUser, Campaign, Navigation, SingleUser } from "./";
+import { TableUsers, NewUser, SingleUser } from "./Users";
+import { Navigation } from "./";
+import { Campaign } from "./Campaign";
 import { ContentWrapper } from "./styled-components/styles";
 
 const Main = ({ setIsVerified }) => {

@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
-import { default as api } from "./api/";
+import { default as api } from "../api";
 import { TableCampaigns, CampaignForm } from "./";
-import { CampaignWrapper } from "./styled-components/styles";
+import { CampaignWrapper } from "../styled-components/styles";
 
 const Campaign = ({ dataNames, campaignsData, refetchCampaigns }) => {
   const dataTable = campaignsData.map((el) => {

@@ -19,9 +19,20 @@ const Login = ({ setIsVerified }) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form
+      onSubmit={submitHandler}
+      style={{ width: 500, border: "1px solid lightgray", padding: 24 }}
+    >
       <div>
-        <p>pass: 123</p>
+        <p>Komentarz:</p>
+        <p>
+          pass: <b style={{ fontSize: 30 }}>123</b>
+        </p>
+        <p>
+          Nie jestem pewien co do Mailgun, w konsoli dostaje status 200 i
+          odpowiedz, ze niby dobrze wg dokumentacji, ale maile faktycznie nie
+          przychodza do nawet zweryfikowanych odbiorcow
+        </p>
       </div>
       <label htmlFor="password">
         <p>Password</p>

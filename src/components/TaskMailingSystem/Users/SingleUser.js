@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { default as api } from "./api/";
-import { SingleUserWrapper } from "./styled-components/styles";
+import { default as api } from "../api/";
+import { SingleUserWrapper } from "../styled-components/styles";
 
 const SingleUser = () => {
   const { id } = useParams();

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
-import { Snackbar } from "./Snackbar/";
-import { FormWrapper } from "./styled-components/styles";
+import { Snackbar } from "../Snackbar";
+import { FormWrapper } from "../styled-components/styles";
 
 const NewUser = ({ submitUser }) => {
   const [isSnackbarActive, setIsSnackbarActive] = useState(false);
