@@ -10,11 +10,7 @@ const getData = async () => {
     Authorization: API_KEY,
   };
 
-  const res = await axios
-    .get(`${API_URL}/mails?sort%5B0%5D%5Bfield%5D=id`)
-    .catch((error) => {
-      console.log(error);
-    });
+  const res = await axios.get(`${API_URL}/mails?sort%5B0%5D%5Bfield%5D=id`);
 
   return res.data;
 };
@@ -68,11 +64,9 @@ const getCampaigns = async () => {
     Authorization: API_KEY,
   };
 
-  const res = await axios
-    .get(`${API_URL}/campaigns?sort%5B0%5D%5Bfield%5D=Name`)
-    .catch((error) => {
-      console.log(error);
-    });
+  const res = await axios.get(
+    `${API_URL}/campaigns?sort%5B0%5D%5Bfield%5D=Name`
+  );
 
   return res.data;
 };

@@ -143,3 +143,13 @@ export const SingleUserWrapper = styled.div`
     cursor: pointer;
   }
 `;
+
+export const ErrorMessageWrapper = styled.div`
+  border: 2px solid #853c38;
+  padding: 4px 24px;
+  border-radius: 12px;
+
+  h3 {
+    color: #d6d6d6;
+  }
+`;

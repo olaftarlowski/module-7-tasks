@@ -17,8 +17,11 @@ const App = () => {
   return (
     <div className="App App-header">
       {/* <UserList /> */}
-      {!isVerified && <Login setIsVerified={setIsVerified} />}
-      {isVerified && <Main setIsVerified={setIsVerified} />}
+      {isVerified ? (
+        <Main setIsVerified={setIsVerified} />
+      ) : (
+        <Login setIsVerified={setIsVerified} />
+      )}
     </div>
   );
 };
