@@ -1,27 +1,14 @@
 import moment from "moment";
-import axios from "axios";
-
-const API_KEY = `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`;
-const API_URL = "https://api.airtable.com/v0/appLktO7FFmlPGju3";
+import { api } from "./config";
 
 const getData = async () => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: API_KEY,
-  };
-
-  const res = await axios.get(`${API_URL}/mails?sort%5B0%5D%5Bfield%5D=id`);
+  const res = await api.get("/mails?sort%5B0%5D%5Bfield%5D=id");
 
   return res.data;
 };
 
 const getSingleUser = async (id) => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: API_KEY,
-  };
-
-  const res = await axios.get(`${API_URL}/mails/${id}`).catch((error) => {
+  const res = await api.get(`/mails/${id}`).catch((error) => {
     console.log(error);
   });
 
@@ -29,11 +16,6 @@ const getSingleUser = async (id) => {
 };
 
 const postUser = async ({ name, email }) => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: API_KEY,
-  };
-
   const newDate = moment().format("YYYY-MM-DD");
 
   const data = {
@@ -48,8 +30,8 @@ const postUser = async ({ name, email }) => {
     ],
   };
 
-  await axios
-    .post(`${API_URL}/mails`, data)
+  await api
+    .post("/mails", data)
     .then(function (response) {
       console.log(response);
     })
@@ -59,24 +41,12 @@ const postUser = async ({ name, email }) => {
 };
 
 const getCampaigns = async () => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: API_KEY,
-  };
-
-  const res = await axios.get(
-    `${API_URL}/campaigns?sort%5B0%5D%5Bfield%5D=Name`
-  );
+  const res = await api.get("/campaigns?sort%5B0%5D%5Bfield%5D=Name");
 
   return res.data;
 };
 
 const postCampaign = async ({ titleText, content, status }) => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: API_KEY,
-  };
-
   const data = {
     records: [
       {
@@ -89,8 +59,8 @@ const postCampaign = async ({ titleText, content, status }) => {
     ],
   };
 
-  await axios
-    .post(`${API_URL}/campaigns`, data)
+  await api
+    .post("/campaigns", data)
     .then(function (response) {
       console.log(response);
     })
@@ -102,11 +72,6 @@ const postCampaign = async ({ titleText, content, status }) => {
 const patchCampaign = async ({
   details: { id, titleText, content, status },
 }) => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: API_KEY,
-  };
-
   const data = {
     records: [
       {
@@ -120,8 +85,8 @@ const patchCampaign = async ({
     ],
   };
 
-  await axios
-    .patch(`${API_URL}/campaigns`, data)
+  await api
+    .patch("/campaigns", data)
     .then(function (response) {
       console.log(response);
     })
@@ -131,13 +96,8 @@ const patchCampaign = async ({
 };
 
 const deleteCampaign = async (id) => {
-  axios.defaults.headers = {
-    "Content-Type": "application/json",
-    Authorization: API_KEY,
-  };
-
-  await axios
-    .delete(`${API_URL}/campaigns/${id}`)
+  await api
+    .delete(`/campaigns/${id}`)
     .then(function (response) {
       console.log(response);
     })
