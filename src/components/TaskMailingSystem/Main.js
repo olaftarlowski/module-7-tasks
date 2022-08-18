@@ -40,18 +40,13 @@ const Main = ({ setIsVerified }) => {
     getDataHandler();
   }, []);
 
-  const dataTable = userData.map((el) => {
-    el.fields.id = el.id;
-    return el.fields;
+  const dataTable = userData.map((item) => {
+    item.fields.id = item.id;
+    return item.fields;
   });
-
-  const check = () => {
-    console.log(errorUserData);
-  };
 
   return (
     <Router>
-      <button onClick={check}>check</button>
       <h2>Mailing system</h2>
       <Navigation setIsVerified={setIsVerified} />
       <ContentWrapper>
